@@ -9,9 +9,9 @@ protocol PageViewDelegate: AnyObject {
   func pageViewDidTap(_ pageView: PageView)
   func pageViewDidDoubleTap(_ pageView: PageView)}
 
-class PageView: UIScrollView {
+open class PageView: UIScrollView {
 
-  lazy var imageView: UIImageView = {
+    open lazy var imageView: UIImageView = {
     let imageView = UIImageView()
     imageView.contentMode = .scaleAspectFit
     imageView.clipsToBounds = true
@@ -67,7 +67,7 @@ class PageView: UIScrollView {
     fetchImage()
   }
 
-  required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
@@ -157,7 +157,7 @@ class PageView: UIScrollView {
 
   // MARK: - Layout
 
-  override func layoutSubviews() {
+    public  override func layoutSubviews() {
     super.layoutSubviews()
 
     loadingIndicator.center = imageView.center
@@ -235,11 +235,11 @@ extension PageView: LayoutConfigurable {
 
 extension PageView: UIScrollViewDelegate {
 
-  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+  public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
     return imageView
   }
 
-  func scrollViewDidZoom(_ scrollView: UIScrollView) {
+    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
     centerImageView()
     pageViewDelegate?.pageViewDidZoom(self)
   }
